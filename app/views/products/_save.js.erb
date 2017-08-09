@@ -1,0 +1,10 @@
+// we need to create a partial that will be shared between the create, update, and destroy js files. This file will determine if the product was successfully saved. If so it will hide the modal dialog, otherwise it will list the errors. Create the _save.js.erb file and add in the code listed below.
+$("ul.errors").html("")
+<% if @product.errors.any? %>
+  <% @product.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $(".product-index").html("<%= escape_javascript(render 'index') %>")
+  $("#product-modal").modal("hide")
+<% end %>
